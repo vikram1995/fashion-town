@@ -8,18 +8,25 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "seed": "ts-node --skip-project src/scripts/seed-from-json.js",
+    "seed:dev": "dotenv -e .env -- npm run seed"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
-    "@next/font": "^14.2.15",
+    "@neondatabase/serverless": "^0.10.4",
     "@phosphor-icons/react": "^2.1.7",
+    "@radix-ui/react-separator": "^1.1.2",
+    "@radix-ui/react-slider": "^1.2.3",
     "@radix-ui/react-slot": "^1.1.2",
     "@stripe/stripe-js": "^5.6.0",
     "@tanstack/react-query": "^5.66.9",
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.40.0",
+    "drizzle-zod": "^0.7.0",
     "google": "^2.1.0",
     "lucide-react": "^0.475.0",
     "next": "15.1.7",
@@ -29,13 +36,16 @@
     "stripe": "^17.6.0",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.24.2",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@types/node": "^20",
+    "@types/node": "^20.17.19",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv-cli": "^8.0.0",
+    "drizzle-kit": "^0.30.5",
     "eslint": "^9.21.0",
     "eslint-config-next": "15.1.7",
     "eslint-config-prettier": "^10.0.1",
@@ -43,6 +53,8 @@
     "postcss": "^8",
     "prettier": "^3.5.2",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
   }
 }
