@@ -1,20 +1,23 @@
 "use client"
+
 import { useState } from 'react'
+import Link from 'next/link'
 import Search from '../search'
 import Cart from '../cart'
 import Profile from '../profile'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { CATEGORY_LINKS } from '@/lib/constants'
 
 const menuList = [{
     name: "MEN",
-    href: '/men'
+    href: CATEGORY_LINKS.MEN
 },
 {
     name: "WOMEN",
-    href: '/men'
+    href: CATEGORY_LINKS.WOMEN
 }, {
     name: "ACCESSORIES",
-    href: '/men'
+    href: CATEGORY_LINKS.ACCESSORIES
 }
 ]
 
@@ -33,7 +36,11 @@ function Nav() {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex gap-20 font-bold text-sm">
-                    {menuList.map(menu => <div className="cursor-pointer border-b-2 border-transparent hover:border-b-orange-600 transition-colors duration-200">{menu.name}</div>
+                    {menuList.map((menu, index) =>
+                        <Link href={menu.href} key={index}>
+                            <div className="cursor-pointer border-b-2 border-transparent hover:border-b-orange-600 transition-colors duration-200">{menu.name}</div>
+                        </Link>
+
                     )}
                 </nav>
 
@@ -58,9 +65,7 @@ function Nav() {
             {/* Mobile Navigation Menu */}
             {mobileMenuOpen && (
                 <nav className="md:hidden mt-4 flex flex-col gap-4 font-bold text-sm">
-                    <div className="cursor-pointer">MEN</div>
-                    <div className="cursor-pointer">WOMEN</div>
-                    <div className="cursor-pointer">ACCESSORIES</div>
+                    {menuList.map((menu, index) => <div key={index} className="cursor-pointer">{menu.name}</div>)}
                     {/* Optionally include the search on mobile */}
                     <div className="mt-2">
                         <Search />

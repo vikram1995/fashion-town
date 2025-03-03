@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Assistant } from "next/font/google";
 import "./globals.css";
+import Nav from "@/components/nav";
 
 const assistant = Assistant({ variable: "--font-assistant", subsets: ['latin'], weight: ['300', '400', '500', '700'] });
 
@@ -19,7 +20,11 @@ export default function RootLayout({
       <body
         className={`${assistant.variable} antialiased`}
       >
-        {children}
+        <Nav />
+        <div className="mt-[76px]">
+          {children}
+        </div>
+
       </body>
     </html>
   );

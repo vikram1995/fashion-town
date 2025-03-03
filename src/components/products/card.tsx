@@ -1,0 +1,68 @@
+'use client'
+
+import { Button } from '@/components/ui/button'
+import { Product } from '@/lib/db/schema'
+import Image from 'next/image'
+import Link from 'next/link'
+import React, { useRef, useState } from 'react'
+
+
+interface ProductCardProps {
+    product: Product
+}
+const Card = ({ product }: ProductCardProps) => {
+    const { name, brand, price, images, id } = product
+    const [imageIndex, setImageIndex] = useState(0)
+    const [showAddToCart, setShowAddToCart] = useState(false)
+    const intervalId = useRef()
+
+    const handleImageOnMouseEnter = () => {
+        setShowAddToCart(true)
+        intervalId.current = setInterval(() => {
+            console.log("images.length", images.length, imageIndex)
+            setImageIndex(prev => prev < images.length - 1 ? prev + 1 : 0)
+        }, 1000)
+    }
+
+    const handleImageOnMouseLeave = () => {
+        setShowAddToCart(false)
+        clearInterval(intervalId.current);
+        setImageIndex(0)
+    }
+    return (
+        <div className=" overflow-hidden hover:shadow-lg transition-shadow max-w-[245px]" onMouseEnter={handleImageOnMouseEnter} onMouseLeave={handleImageOnMouseLeave}>
+            <Link href={`/products/${id}`} className="block">
+                <div className="relative h-[280px] w-full">
+                    <Image
+                        src={images[imageIndex]}
+                        alt={name}
+                        fill
+                        className="object-contain"
+                    //sizes="(max-width: 768px) 100vw, (max-width: 245px) 50vw, 33vw"
+                    />
+                    <div className={`absolute bottom-0 bg-background w-full flex justify-center p-2 transition-opacity duration-400 ${showAddToCart ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                    >
+                        <Button
+                            variant="outline"
+                            className="rounded-none w-[90%]"
+                            onClick={() => console.log('Add to cart', id)}
+                        >
+                            Add to Cart
+                        </Button>
+                    </div>
+                </div>
+
+                <div className="p-2 flex flex-col">
+
+                    {<h3 className="font-bold text-base">{brand}</h3>}
+                    <p className="text-sm text-gray-500 font-normal line-clamp-1">{name}</p>
+                    <p className="text-gray-700 text-sm font-bold">₹{price}</p>
+                </div>
+            </Link>
+
+
+        </div>
+    )
+}
+
+export default Card
