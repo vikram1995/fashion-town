@@ -17,7 +17,7 @@ const menuList = [{
     href: CATEGORY_LINKS.WOMEN
 }, {
     name: "ACCESSORIES",
-    href: CATEGORY_LINKS.ACCESSORIES
+    href: CATEGORY_LINKS.UNISEX
 }
 ]
 

@@ -52,11 +52,13 @@ const Card = ({ product }: ProductCardProps) => {
                     </div>
                 </div>
 
-                <div className="p-2 flex flex-col">
+                <div className="p-3">
+                    <h3 className="font-medium text-gray-900">{brand}</h3>
+                    <p className="text-sm text-gray-700 truncate">{name}</p>
+                    <div className="mt-1 flex items-center justify-between">
+                        <span className="text-sm font-medium">₹{price}</span>
+                    </div>
 
-                    {<h3 className="font-bold text-base">{brand}</h3>}
-                    <p className="text-sm text-gray-500 font-normal line-clamp-1">{name}</p>
-                    <p className="text-gray-700 text-sm font-bold">₹{price}</p>
                 </div>
             </Link>
 

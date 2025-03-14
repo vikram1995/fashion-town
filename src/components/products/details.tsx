@@ -1,14 +1,11 @@
-// app/products/[id]/page.tsx
-import { db } from '@/lib/db'
-
-import { eq } from 'drizzle-orm'
-import { notFound } from 'next/navigation'
+"use client"
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Star, Truck, Shield, Tag } from 'lucide-react'
-import { products } from '@/lib/db/schema'
+import { useState } from 'react'
 
-export default async function ProductPage({ product }) {
+export default function ProductPage({ product }) {
+    const [showingImageIndex, setShowingImageIndex] = useState(0);
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -19,7 +16,7 @@ export default async function ProductPage({ product }) {
                         {/* Thumbnails */}
                         <div className="col-span-1 space-y-4">
                             {product.images.map((image, index) => (
-                                <div key={index} className="aspect-square relative border rounded cursor-pointer">
+                                <div key={index} className="aspect-square relative border rounded cursor-pointer" onClick={() => setShowingImageIndex(index)}>
                                     <Image
                                         src={image}
                                         alt={`${product.name} thumbnail ${index + 1}`}
@@ -33,7 +30,7 @@ export default async function ProductPage({ product }) {
                         {/* Main Image */}
                         <div className="col-span-4 aspect-square relative">
                             <Image
-                                src={product.images[0]}
+                                src={product.images[showingImageIndex]}
                                 alt={product.name}
                                 fill
                                 className="object-contain"

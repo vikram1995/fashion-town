@@ -1,24 +1,46 @@
-import Filter from "@/components/filter"
+import FilterSection from "@/components/filtersSidebar"
 import Listing from "@/components/products"
 import { Separator } from "@/components/ui/separator"
+import { FILTER_DATA } from "@/lib/constants"
 import { db } from "@/lib/db"
-import { products } from "@/lib/db/schema"
+import { sql } from "drizzle-orm"
 
+const ProductListing = async ({
+    searchParams,
+}: {
+    searchParams: { [key: string]: string | string[] | undefined }
+}) => {
 
-const ProductListingPage = async () => {
-    const productList = await db.select().from(products)
+    const brandFilter = searchParams.brand
+        ? sql`AND brand IN ${sql.raw(`(${typeof searchParams.brand == "string" ? `'${searchParams.brand}'` : searchParams.brand.map(b => `'${b}'`).join(',')})`)}`
+        : sql``
+    const genderFilter = searchParams.gender
+        ? sql`AND gender IN ${sql.raw(`(${typeof searchParams.gender == "string" ? `'${searchParams.gender}'` : searchParams.gender.map(b => `'${b}'`).join(',')})`)}`
+        : sql``
+
+    // Fetch filtered products
+    const products = await db.execute<Product[]>(sql`
+    SELECT * FROM products
+    WHERE 1=1
+    ${brandFilter}
+    ${genderFilter}
+    ORDER BY created_at DESC
+    LIMIT 50
+  `)
     return (
         <div className="flex gap-4">
-            <div className="hidden md:block min-w-48">
-                <Filter />
+            <div className="hidden md:block min-w-60">
+                <FilterSection {...FILTER_DATA} />
             </div>
             <Separator orientation="vertical" className="h-auto" />
             <div className="">
-                <Listing productList={productList} />
+
+                <Listing initialProducts={products?.rows} />
+
             </div>
 
-        </div>
+        </div >
     )
 }
 
-export default ProductListingPage
+export default ProductListing

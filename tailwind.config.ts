@@ -19,6 +19,7 @@ export default {
     },
     extend: {
       colors: {
+        "myntra-blue": "#FF3F6C", // Myntra's brand color
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
