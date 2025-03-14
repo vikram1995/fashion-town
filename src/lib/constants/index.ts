@@ -91,10 +91,4 @@ export const FILTER_DATA = {
     { name: "Russell Athletic", count: 1 },
     { name: "MIMOSA", count: 1 },
   ],
-  // colors: [
-  //   { name: "Black", count: 30308 },
-  //   { name: "White", count: 22504 },
-  //   // ... other colors
-  // ],
-  // priceRange: { min: 100, max: 10100 },
 };

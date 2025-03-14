@@ -3,9 +3,23 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Star, Truck, Shield, Tag } from 'lucide-react'
 import { useState } from 'react'
+import { useCartStore } from '@/store'
+import { toast } from "sonner"
 
 export default function ProductPage({ product }) {
     const [showingImageIndex, setShowingImageIndex] = useState(0);
+    const [selectedSize, setSelectedSize] = useState('')
+    const addItem = useCartStore((state) => state.addItem)
+    const itemsInCart = useCartStore((state) => state.items)
+
+    const sizeHandler = (size: string) => {
+        setSelectedSize(size)
+    }
+
+    const addToCartHandler = () => {
+        addItem({ ...product, size: selectedSize })
+        toast("Product added to cart")
+    }
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -85,28 +99,23 @@ export default function ProductPage({ product }) {
 
                     {/* Size Selector */}
                     <div className="space-y-4">
-                        <div className="flex justify-between items-center">
-                            <h3 className="font-medium">Select Size</h3>
-                            <button className="text-blue-600 text-sm">Size Chart</button>
-                        </div>
                         <div className="grid grid-cols-4 gap-2">
                             {['S', 'M', 'L', 'XL'].map((size) => (
-                                <button
+                                <Button
                                     key={size}
-                                    className="border rounded p-2 text-center hover:border-black focus:border-black focus:bg-black focus:text-white"
+                                    variant={size === selectedSize ? 'default' : 'outline'}
+                                    onClick={() => sizeHandler(size)}
                                 >
                                     {size}
-                                </button>
+                                </Button>
                             ))}
                         </div>
                     </div>
 
                     {/* Add to Cart */}
                     <div className="space-y-4">
-                        <Button className="w-full h-12 rounded">Add to Cart</Button>
-                        <Button variant="outline" className="w-full h-12 rounded">
-                            Wishlist
-                        </Button>
+                        <Button className="w-full h-12 rounded" onClick={addToCartHandler}>Add to Cart</Button>
+
                     </div>
 
                     {/* Product Details */}

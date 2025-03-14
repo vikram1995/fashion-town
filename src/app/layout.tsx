@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Assistant } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/nav";
+import { Toaster } from "@/components/ui/sonner"
 
 const assistant = Assistant({ variable: "--font-assistant", subsets: ['latin'], weight: ['300', '400', '500', '700'] });
 
@@ -24,7 +25,7 @@ export default function RootLayout({
         <div className="mt-[76px]">
           {children}
         </div>
-
+        <Toaster />
       </body>
     </html>
   );

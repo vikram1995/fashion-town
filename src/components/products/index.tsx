@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
-const Listing = async ({
+const Listing = ({
     initialProducts,
     searchParams,
 }: {
