@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { ShoppingBagIcon } from '@heroicons/react/24/outline'
 import { useCartStore } from '@/store';
 import Link from 'next/link';
@@ -8,7 +7,6 @@ function Cart() {
     const cartItems = useCartStore((state) => state.items);
     const cartCount = cartItems.length
 
-    console.log("cartCount", cartCount)
     return (
         <Link href={`/cart`} className="block">
             <div className='relative cursor-pointer'>

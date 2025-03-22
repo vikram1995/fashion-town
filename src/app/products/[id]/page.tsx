@@ -17,7 +17,6 @@ export default async function ProductPage({
         .select()
         .from(products)
         .where(eq(products.id, params.id))
-    console.log("product", product)
 
     return <div><Details product={product} /></div>
 }

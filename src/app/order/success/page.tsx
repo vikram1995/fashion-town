@@ -1,9 +1,9 @@
-import CartPage from '@/components/cart/cartPage'
+import OrderSuccess from '@/components/order'
 import React from 'react'
 
 function Page() {
     return (
-        <CartPage />
+        <OrderSuccess />
     )
 }
 

@@ -1,9 +1,9 @@
-import CartPage from '@/components/cart/cartPage'
+import { SignUpForm } from '@/components/signUp'
 import React from 'react'
 
 function Page() {
     return (
-        <CartPage />
+        <div><SignUpForm /></div>
     )
 }
 
