@@ -1,10 +1,12 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { Button } from "@/components/ui/button"
+import { CATEGORY_LINKS } from '@/lib/constants'
 
 
 function Landing() {
   return (
-    <div className='mt-20'>
+    <>
       <section className='relative'>
         <Image
           src="/images/fashion-town-hero.jpg"
@@ -17,7 +19,10 @@ function Landing() {
         <div className="absolute inset-0 bg-black/30"></div>
         <div className='absolute top-[20%] left-[10%] flex flex-col gap-20'>
           <div className='text-white text-5xl'>ITS TIME TO STAND<br /> OUT FROM THE <br />CROWED</div>
-          <Button variant="outline" className="rounded-3xl w-fit">SHOP NOW</Button>
+          <Link href={CATEGORY_LINKS.ALL}>
+            <Button variant="outline" className="rounded-3xl w-fit">SHOP NOW</Button>
+          </Link>
+
         </div>
       </section>
       <section className='flex flex-col md:flex-row p-2 gap-2'>
@@ -33,7 +38,10 @@ function Landing() {
             className='w-full h-[500px] object-cover'
           />
           <div className='absolute top-[80%] left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-            <Button variant="outline" className="rounded-3xl w-fit ">MEN</Button>
+            <Link href={CATEGORY_LINKS.MEN}>
+              <Button variant="outline" className="rounded-3xl w-fit ">MEN</Button>
+            </Link>
+
           </div>
 
         </div>
@@ -48,7 +56,10 @@ function Landing() {
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-black/30"></div>
           <div className='absolute top-[80%] left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-            <Button variant="outline" className="rounded-3xl w-fit ">WOMEN</Button>
+            <Link href={CATEGORY_LINKS.WOMEN}>
+              <Button variant="outline" className="rounded-3xl w-fit ">WOMEN</Button>
+            </Link>
+
           </div>
         </div>
       </section>
@@ -63,10 +74,13 @@ function Landing() {
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black/30"></div>
         <div className='absolute top-[80%] left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-          <Button variant="outline" className="rounded-3xl w-fit ">ACCESSORIES</Button>
+          <Link href={CATEGORY_LINKS.ACCESSORIES}>
+            <Button variant="outline" className="rounded-3xl w-fit ">ACCESSORIES</Button>
+          </Link>
+
         </div>
       </section>
-    </div>
+    </>
   )
 }
 
