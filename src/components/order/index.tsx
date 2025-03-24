@@ -12,22 +12,22 @@ export default function OrderSuccess() {
     const searchParams = useSearchParams();
     const sessionId = searchParams.get('session_id');
 
-    useEffect(() => {
-        const verifyPayment = async () => {
-            try {
-                const response = await fetch(`/api/verify-payment?session_id=${sessionId}`);
-                const data = await response.json();
+    // useEffect(() => {
+    //     const verifyPayment = async () => {
+    //         try {
+    //             const response = await fetch(`/api/verify-payment?session_id=${sessionId}`);
+    //             const data = await response.json();
 
-                if (!response.ok) throw new Error(data.error);
+    //             if (!response.ok) throw new Error(data.error);
 
-                // Handle successful payment (clear cart, update DB, etc.)
-            } catch (error) {
-                console.error('Payment Verification Failed:', error);
-            }
-        };
+    //             // Handle successful payment (clear cart, update DB, etc.)
+    //         } catch (error) {
+    //             console.error('Payment Verification Failed:', error);
+    //         }
+    //     };
 
-        if (sessionId) verifyPayment();
-    }, [sessionId]);
+    //     if (sessionId) verifyPayment();
+    // }, [sessionId]);
 
     return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center">

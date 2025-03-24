@@ -83,7 +83,7 @@ export function LoginForm() {
 
                 <p className="mt-6 text-center text-sm text-gray-600">
                     New to Store?{' '}
-                    <a href="/signup" className="text-[#FF3F6C] font-semibold hover:underline">
+                    <a href="/auth/signup" className="text-[#FF3F6C] font-semibold hover:underline">
                         Create Account
                     </a>
                 </p>

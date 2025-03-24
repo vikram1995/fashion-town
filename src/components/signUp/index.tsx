@@ -7,8 +7,10 @@ import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
 import { signUp } from "@/lib/auth/sign-up"
+import { useRouter } from "next/navigation"
 
 export function SignUpForm() {
+    const router = useRouter()
     const form = useForm({
         defaultValues: {
             name: "",
@@ -22,6 +24,7 @@ export function SignUpForm() {
         event.preventDefault()
         const { name, email, password } = data
         signUp({ name, email, password })
+        router.back()
     }
 
     return (

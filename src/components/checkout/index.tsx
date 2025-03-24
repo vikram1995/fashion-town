@@ -44,6 +44,7 @@ export function CheckoutPage() {
             state: "",
             zipCode: "",
             phoneNumber: "",
+            isDefault: false,
             saveAddress: false
         }
     })
@@ -55,46 +56,78 @@ export function CheckoutPage() {
         )
     }
 
-    const handleStripePayment = async (formData: z.infer<typeof addressSchema>) => {
+    const getLineItems = () => {
+        const lineItems = items.map(item => ({
+            name: item.name,
+            images: [item.images[0]],
+            price: item.price,
+            quantity: item.quantity,
+            size: item.size,
+        }))
+        return lineItems
+    }
+
+    const createOrder = async (formData: z.infer<typeof addressSchema>, session) => {
         try {
-            setIsSubmitting(true)
+            const { data } = await authClient.getSession()
+            const userId = data?.user.id
+
+            const response = await fetch('/api/orders', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    session,
+                    items: getLineItems(),
+                    metadata: {
+                        address: JSON.stringify(formData),
+                        userId,
+
+                    }
+                }),
+            })
+            const resData = await response.json()
+            if (resData) {
+                clearCart()
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const handleStripePayment = async (formData: z.infer<typeof addressSchema>) => {
+
+        try {
+
             await form.trigger()
 
             if (!form.formState.isValid) return
 
-            const lineItems = items.map(item => ({
-                name: item.name,
-                images: [item.images[0]],
-                price: item.price,
-                quantity: item.quantity,
-                size: item.size,
-            }))
-
             const { data } = await authClient.getSession()
             const userId = data?.user.id
-
+            setIsSubmitting(true)
             const response = await fetch('/api/checkout', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    items: lineItems,
+                    items: getLineItems(),
                     metadata: {
-                        ...formData,
-                        userId, // Replace with actual user ID
+                        address: JSON.stringify(formData),
+                        userId,
                     }
                 }),
             })
 
             if (!response.ok) throw new Error('Checkout failed')
-            // else {
-            //     clearCart()
-            // }
 
-            const { id } = await response.json()
+            const { session } = await response.json()
+            console.log("response", session)
+
+            const { id } = session
             const stripe = await stripePromise
-
+            await createOrder(formData, session)
             const { error } = await stripe!.redirectToCheckout({ sessionId: id })
             if (error) throw error
+
 
         } catch (error) {
             console.error('Checkout Error:', error)

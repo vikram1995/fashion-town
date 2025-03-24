@@ -28,7 +28,7 @@ export async function POST(req: Request) {
       metadata: metadata,
     });
 
-    return NextResponse.json({ id: session.id });
+    return NextResponse.json({ session });
   } catch (error) {
     console.error("Stripe Error:", error);
     return NextResponse.json(

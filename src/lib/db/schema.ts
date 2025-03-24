@@ -105,7 +105,14 @@ export const address = pgTable("address", {
   phoneNumber: varchar("phone_number").notNull(),
   userId: varchar("user_id").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
+  isDefault: boolean("is_default").notNull(),
 });
+
+// Generate Zod schema from Drizzle table
+export const insertAddressSchema = createInsertSchema(address);
+
+// Type for form validation
+export type AddressFormValues = typeof insertAddressSchema;
 
 export const orders = pgTable("orders", {
   id: varchar("id").primaryKey(),
