@@ -1,9 +1,6 @@
-import FilterSection from "@/components/filtersSidebar"
 import Listing from "@/components/products"
 import { Separator } from "@/components/ui/separator"
 import { db } from "@/lib/db"
-import { Product } from "@/lib/db/schema"
-import { useCartStore } from "@/store"
 import { sql } from "drizzle-orm"
 
 const ProductListing = async ({
