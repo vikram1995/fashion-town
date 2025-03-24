@@ -10,7 +10,6 @@ export default function ProductPage({ product }) {
     const [showingImageIndex, setShowingImageIndex] = useState(0);
     const [selectedSize, setSelectedSize] = useState('')
     const addItem = useCartStore((state) => state.addItem)
-    const itemsInCart = useCartStore((state) => state.items)
 
     const sizeHandler = (size: string) => {
         setSelectedSize(size)
@@ -18,7 +17,7 @@ export default function ProductPage({ product }) {
 
     const addToCartHandler = () => {
         addItem({ ...product, size: selectedSize })
-        toast("Product added to cart")
+        toast.success("Product added to cart")
     }
 
     return (

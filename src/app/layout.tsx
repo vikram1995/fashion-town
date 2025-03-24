@@ -25,7 +25,7 @@ export default function RootLayout({
         <div className="mt-[76px]">
           {children}
         </div>
-        <Toaster />
+        <Toaster position="top-right" />
       </body>
     </html>
   );

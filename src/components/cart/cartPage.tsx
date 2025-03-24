@@ -71,7 +71,7 @@ const CartPage = () => {
                                                     <p className="text-gray-600">Size: {item.size || 'One Size'}</p>
                                                 </div>
                                                 <button
-                                                    onClick={() => removeItem(item.id)}
+                                                    onClick={() => removeItem(item.id, item.size || 'One Size')}
                                                     className="text-gray-400 hover:text-red-600"
                                                 >
                                                     ✕
@@ -82,7 +82,7 @@ const CartPage = () => {
                                             <div className="mt-4 flex items-center justify-between">
                                                 <div className="flex items-center border rounded">
                                                     <button
-                                                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                                        onClick={() => updateQuantity(item.id, item.size, item.quantity - 1)}
                                                         disabled={item.quantity <= 1}
                                                         className="px-3 py-1 hover:bg-gray-100 disabled:opacity-50"
                                                     >
@@ -90,7 +90,7 @@ const CartPage = () => {
                                                     </button>
                                                     <span className="px-4">{item.quantity}</span>
                                                     <button
-                                                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                                        onClick={() => updateQuantity(item.id, item.size, item.quantity + 1)}
                                                         className="px-3 py-1 hover:bg-gray-100"
                                                     >
                                                         +

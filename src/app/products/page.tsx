@@ -8,11 +8,13 @@ const ProductListing = async ({
 }: {
     searchParams: { [key: string]: string | string[] | undefined }
 }) => {
-    const brandFilter = searchParams.brand
-        ? sql`AND brand IN ${sql.raw(`(${typeof searchParams.brand == "string" ? `'${searchParams.brand}'` : searchParams.brand.map(b => `'${b}'`).join(',')})`)}`
+
+    const { brand, gender } = await searchParams
+    const brandFilter = brand
+        ? sql`AND brand IN ${sql.raw(`(${typeof brand == "string" ? `'${brand}'` : brand.map(b => `'${b}'`).join(',')})`)}`
         : sql``
-    const genderFilter = searchParams.gender
-        ? sql`AND gender IN ${sql.raw(`(${typeof searchParams.gender == "string" ? `'${searchParams.gender}'` : searchParams.gender.map(b => `'${b}'`).join(',')})`)}`
+    const genderFilter = gender
+        ? sql`AND gender IN ${sql.raw(`(${typeof gender == "string" ? `'${gender}'` : gender.map(b => `'${b}'`).join(',')})`)}`
         : sql``
 
     // Fetch filtered products
