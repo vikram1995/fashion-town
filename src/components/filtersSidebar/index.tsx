@@ -63,7 +63,7 @@ export default function FilterSection() {
             ])
         );
         setFilters(updatedFilters);
-    }, [])
+    }, [searchParams])
 
     return (
         <div className="min-w-[100%] p-8">
