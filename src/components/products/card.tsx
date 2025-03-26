@@ -30,12 +30,12 @@ const Card = ({ product }: ProductCardProps) => {
     return (
         <div className=" overflow-hidden hover:shadow-lg transition-shadow max-w-[245px]" onMouseEnter={handleImageOnMouseEnter} onMouseLeave={handleImageOnMouseLeave}>
             <Link href={`/products/${id}`} className="block">
-                <div className="relative h-[280px] w-full">
+                <div className="relative h-[230px] md:h-[250px] w-full">
                     <Image
                         src={images[imageIndex]}
                         alt={name}
                         fill
-                        className="object-contain"
+                        className="object-cover md:object-contain "
                     //sizes="(max-width: 768px) 100vw, (max-width: 245px) 50vw, 33vw"
                     />
                 </div>
