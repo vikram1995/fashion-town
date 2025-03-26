@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { authClient } from "./auth-client";
 
 interface SignInProps {
@@ -10,18 +11,20 @@ export const signIn = async ({ email, password }: SignInProps) => {
     {
       email, // user email address
       password, // user password -> min 8 characters by default
-      //callbackURL: "/dashboard", // a url to redirect to after the user verifies their email (optional)
+      //callbackURL: "/", // a url to redirect to after the user verifies their email (optional)
     },
     {
       onRequest: (ctx) => {
         //show loading
       },
       onSuccess: (ctx) => {
+        toast.success("Sign in successful");
         //redirect to the dashboard or sign in page
       },
       onError: (ctx) => {
         // display the error message
-        alert(ctx.error.message);
+        //alert(ctx.error.message);
+        toast.error(ctx?.error?.message);
       },
     }
   );

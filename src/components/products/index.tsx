@@ -8,10 +8,8 @@ import React, { useState } from 'react'
 
 const Listing = ({
     initialProducts,
-    searchParams,
 }: {
     initialProducts: Product[]
-    searchParams: { [key: string]: string | string[] | undefined }
 }) => {
     return (
         <div className="grid grid-cols-1 xm:grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

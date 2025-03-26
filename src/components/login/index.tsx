@@ -20,8 +20,11 @@ export function LoginForm() {
     const onSubmit = async (data: any, event) => {
         event.preventDefault()
         const { email, password } = data
-        await signIn({ email, password })
-        router.back()
+        const authStatus = await signIn({ email, password })
+        if (authStatus?.data) {
+            router.back()
+        }
+
     }
 
     return (

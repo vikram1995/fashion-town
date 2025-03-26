@@ -20,11 +20,13 @@ export function SignUpForm() {
         }
     })
 
-    function onSubmit(data: any, event) {
+    const onSubmit = async (data: any, event) => {
         event.preventDefault()
         const { name, email, password } = data
-        signUp({ name, email, password })
-        router.back()
+        const authStatus = await signUp({ name, email, password })
+        if (authStatus?.data) {
+            router.replace('/')
+        }
     }
 
     return (
@@ -128,7 +130,7 @@ export function SignUpForm() {
 
                 <p className="mt-6 text-center text-sm text-gray-600">
                     Existing User?{' '}
-                    <a href="/login" className="text-[#FF3F6C] font-semibold hover:underline">
+                    <a href="/auth/login" className="text-[#FF3F6C] font-semibold hover:underline">
                         Login
                     </a>
                 </p>
