@@ -18,5 +18,8 @@ export default async function ProductPage({
         .from(products)
         .where(eq(products.id, id))
 
-    return <div><Details product={product} /></div>
+    return (
+        <Details product={product} />
+    )
+
 }

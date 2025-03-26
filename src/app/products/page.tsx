@@ -2,6 +2,9 @@ import Listing from "@/components/products"
 import { Separator } from "@/components/ui/separator"
 import { db } from "@/lib/db"
 import { sql } from "drizzle-orm"
+import { Suspense } from "react"
+import Loading from "./loading"
+import FilterSection from "@/components/filtersSidebar"
 
 const ProductListing = async ({
     searchParams,
@@ -9,9 +12,10 @@ const ProductListing = async ({
     searchParams: { [key: string]: string | string[] | undefined }
 }) => {
 
-    const { brand, gender } = await searchParams
-    const brandFilter = brand
-        ? sql`AND brand IN ${sql.raw(`(${typeof brand == "string" ? `'${brand}'` : brand.map(b => `'${b}'`).join(',')})`)}`
+    const { brands, gender } = await searchParams
+
+    const brandFilter = brands
+        ? sql`AND brand IN ${sql.raw(`(${typeof brands == "string" ? `'${brands}'` : brands.map(b => `'${b}'`).join(',')})`)}`
         : sql``
     const genderFilter = gender
         ? sql`AND gender IN ${sql.raw(`(${typeof gender == "string" ? `'${gender}'` : gender.map(b => `'${b}'`).join(',')})`)}`
@@ -27,18 +31,20 @@ const ProductListing = async ({
     LIMIT 50
   `)
     return (
+
         <div className="flex gap-4">
             <div className="hidden md:block min-w-60">
-                {/* <FilterSection {...FILTER_DATA} /> */}
+                <FilterSection />
             </div>
             <Separator orientation="vertical" className="h-auto" />
             <div className="">
-
-                <Listing initialProducts={products?.rows} />
-
+                <Suspense fallback={<Loading />} key={JSON.stringify(searchParams)} >
+                    <Listing initialProducts={products?.rows} />
+                </Suspense>
             </div>
 
         </div >
+
     )
 }
 
