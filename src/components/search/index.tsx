@@ -1,4 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+'use client'
+
+import React, { Suspense, useEffect, useRef } from 'react'
 import { Input } from "@/components/ui/input"
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { debounceTheFunc } from '@/lib/utils'
@@ -39,4 +41,15 @@ function Search() {
     )
 }
 
-export default Search
+
+
+export function SearchBar() {
+    return (
+        // You could have a loading skeleton as the `fallback` too
+        <Suspense>
+            <Search />
+        </Suspense>
+    )
+}
+
+export default SearchBar

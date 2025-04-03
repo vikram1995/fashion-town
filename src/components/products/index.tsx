@@ -13,7 +13,7 @@ const Listing = async ({
 }: {
     searchParams: { [key: string]: string | string[] | undefined }
 }) => {
-    const { brands, gender, search } = searchParams
+    const { brands, gender, search } = await searchParams
 
     // Build parameterized query
     const queryParams = []
