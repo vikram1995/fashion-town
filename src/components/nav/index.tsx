@@ -32,7 +32,10 @@ function Nav() {
         <header className="fixed top-0 left-0 right-0 bg-white shadow-[0px_4px_12px_0px_rgba(0,0,0,0.05)] z-50 p-[20px]">
             <div className="flex items-center justify-between">
                 {/* Brand */}
-                <h2 className="text-lg font-bold">Fashion Town</h2>
+                <Link href={'/'}>
+                    <h2 className="text-lg font-bold">Fashion Town</h2>
+                </Link>
+
 
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex gap-20 font-bold text-sm">
