@@ -22,7 +22,7 @@ export default function RootLayout({
         className={`${assistant.variable} antialiased`}
       >
         <Nav />
-        <div className="mt-[76px]">
+        <div className="mt-[76px] h-[calc(100vh-76px)]">
           {children}
         </div>
         <Toaster position="top-right" />

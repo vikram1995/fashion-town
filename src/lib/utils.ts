@@ -23,3 +23,16 @@ export function formatPrice(price: number | string): string {
     maximumFractionDigits: 0,
   }).format(amount);
 }
+
+export const debounceTheFunc = (fun: Function, delay: number) => {
+  let timerRef: any;
+  const context = this;
+  return function (...args) {
+    if (timerRef) {
+      clearTimeout(timerRef);
+    }
+    timerRef = setTimeout(() => {
+      fun.apply(context, args);
+    }, delay);
+  };
+};
